@@ -3,7 +3,9 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_CONNECT).then(()=>{console.log('Connected to Mongo')});
+mongoose.connect(process.env.MONGO_CONNECT)
+.then(()=>{console.log('Connected to Mongo')})
+.catch((err)=>{console.log(err)});
 
 const app = express();
 
