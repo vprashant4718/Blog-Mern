@@ -12,14 +12,14 @@ if (!username || !email || !password || username === '' || email=== '' || passwo
 }
 
 const hashedPassword = bcryptjs.hashSync(password, 10);
-        const newUser = await new MyUser({
+        const newUser = new MyUser({
             username,
             email,
             password: hashedPassword,
         });
 
         await newUser.save();
-res.status(201).json('user created successfully');
+    res.status(201).json('user created successfully');
 
     } catch (error) {
         next(error);
