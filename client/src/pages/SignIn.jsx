@@ -1,14 +1,18 @@
 import React from 'react';
 import { Alert, Button, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const [formdata, setformdata] = useState({});
   const [loading, setloading] = useState(false);
   const [message, setmessage] = useState("");
   const [errormessage, seterrormessage] = useState(false);
    
+
+  console.log(formdata)
 
   const handleChange = (e) => {
     setformdata({
@@ -20,13 +24,13 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formdata.username || !formdata.email || !formdata.password) {
+    if (!formdata.email || !formdata.password) {
       return seterrormessage("All fields are required");
     }
     try {
       setloading(true);
 
-      const res = await fetch(`/api/auth/signin`, {
+      const res = await fetch(`/api/auth/sign-in`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,8 +47,8 @@ export default function SignIn() {
       }
       setloading(false);
       seterrormessage(false);
-      setmessage('User Created Successfully');
-      
+      setmessage(data);
+      navigate('/');
       
     } catch (error) {
       seterrormessage(error.message);

@@ -1,8 +1,10 @@
 import { Alert, Button, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const [formdata, setformdata] = useState({});
   const [loading, setloading] = useState(false);
   const [message, setmessage] = useState("");
@@ -43,6 +45,7 @@ export default function SignUp() {
       setloading(false);
       seterrormessage(false);
       setmessage('User Created Successfully');
+      navigate('/sign-in');
       
       
     } catch (error) {

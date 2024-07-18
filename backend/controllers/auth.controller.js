@@ -42,23 +42,24 @@ if (!email || !password || email=== '' || password=== '') {
  const user = await MyUser.findOne({email});
 
  if(!user){
-    return res.status(404).json('user not found');
+    return next(errorHandler(404,'user not found'));
    
  }
 
  const verifypassword = bcryptjs.compareSync(password, user.password)
 
  if(!verifypassword){
-   return res.status(401).json('Invalid User');
+   return next(errorHandler(404, "Invalid password"));
 
  }
-
+ 
  const jwt_token = jwt.sign({id:user._id}, process.env.JWT_SECRET)
+ const {password:pass, ...rest} = user._doc;
 
  res.cookie('access_token', jwt_token)
 
       
-    res.status(200).json('User logged in successfully');
+    res.status(200).json(rest);
 
     } catch (error) {
         next(error);
