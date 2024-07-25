@@ -65,3 +65,45 @@ if (!email || !password || email=== '' || password=== '') {
         next(error);
     }
 }
+
+
+
+
+export const google = async(req,res, next)=>{
+    const {name, email, googlePhotoUrl} = req.body;
+    
+   
+try{
+     const user = await MyUser.findOne({email});
+ 
+ if(user){
+          
+     const jwt_token = jwt.sign({id:user._id}, process.env.JWT_SECRET)
+     const {password:pass, ...rest} = user._doc;
+    
+     res.cookie('access_token', jwt_token);  
+        res.status(200).json(rest);  
+ }
+ else{
+    const generateNewPassword = Math.random().toString(36).slice(-8);
+    const hashedPassword = bcryptjs.hashSync(generateNewPassword, 10);
+    const newUser = new MyUser({
+        username: name.toLowerCase().split(' ').join('')+ Math.random().toString(8).slice(-4),
+        email,
+        password: hashedPassword,
+        googlePhotoUrl
+    });
+
+    await newUser.save();
+
+     const jwt_token = jwt.sign({id:user._id}, process.env.JWT_SECRET)
+     const {password, ...rest} = user._doc;
+    
+     res.cookie('access_token', jwt_token);  
+        res.status(200).json(rest);  
+ }
+}
+catch(error){
+    console.log(error)
+}
+}

@@ -3,10 +3,13 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import { IoSearchSharp } from "react-icons/io5";
 import { BsFillMoonStarsFill } from "react-icons/bs";
+import { useSelector } from 'react-redux';
+import { current } from '@reduxjs/toolkit';
 
 
 
 export default function Header() {
+    const {currentUser} = useSelector((state)=> state.user)
     const path = useLocation().pathname;
   return (
     
@@ -31,9 +34,9 @@ export default function Header() {
                 <BsFillMoonStarsFill/>
             </Button>
 
-        <Link to={'/sign-in'} >
+       {!currentUser && <Link to={'/sign-in'} >
         <Button  gradientDuoTone={'purpleToBlue'}>SingIn</Button>
-        </Link>
+        </Link>}
         
         <Navbar.Toggle />
         </div>
@@ -51,14 +54,16 @@ export default function Header() {
                 </Link>
                 </Navbar.Link>
 
-            <Navbar.Link active={path === '/profile'} as={'div'}>
+            {currentUser && <Navbar.Link active={path === '/profile'} as={'div'}>
                 <Link to={'/profile'}>
-                profile
+                <img src={currentUser.googlePhotoUrl} alt="" className='rounded-full w-10 h-10' />
+               
+                 
                 </Link>
-            </Navbar.Link>
+            </Navbar.Link>}
 
         </Navbar.Collapse>
 
-    </Navbar>
+    </Navbar>   
   )
 }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import  {useDispatch, useSelector} from 'react-redux';
 import { signInFailure, signInStart, signInSuccess } from '../redux/slice/createSlice';
+import OAuth from '../components/OAuth';
 
 
 export default function SignIn() {
@@ -12,9 +13,7 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const [formdata, setformdata] = useState({});
   const [message, setmessage] = useState("");
-   
 
-  console.log(formdata)
 
   const handleChange = (e) => {
     setformdata({
@@ -58,7 +57,7 @@ export default function SignIn() {
       <div className="self-center whitespace-nowrap  text-2xl font-bold
         sm:font-bold sm:text-4xl  items-center dark:text-white"
       >
-        <span className="px-3 py-1 bg-gradient-to-r from-indigo-600 via-purple-800 to-pink-600 rounded-lg text-white">
+  <span className="px-3 py-1 bg-gradient-to-r from-indigo-600 via-purple-800 to-pink-600 rounded-lg text-white">
           {" "}
           True{" "}
         </span>
@@ -94,7 +93,9 @@ export default function SignIn() {
             "SignIn"
           )}
         </Button>
-      <p>already have an account ? <Link to={'/signup'} className="text-blue-700 font-semibold">SignUp</Link></p>
+
+        <OAuth/>
+    <p>already have an account ? <Link to={'/signup'} className="text-blue-700 font-semibold">SignUp</Link></p>
 
         <div>
           {message &&    
