@@ -1,15 +1,18 @@
-import { Button, Navbar, TextInput } from 'flowbite-react'
+import { Avatar, Button, Dropdown, DropdownDivider, DropdownHeader, DropdownItem, Navbar, TextInput } from 'flowbite-react'
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import { IoSearchSharp } from "react-icons/io5";
-import { BsFillMoonStarsFill } from "react-icons/bs";
-import { useSelector } from 'react-redux';
-import { current } from '@reduxjs/toolkit';
+import { BsFillMoonStarsFill, BsSunFill } from "react-icons/bs";
+import { useSelector, useDispatch } from 'react-redux';
+import { toggletheme } from '../redux/slice/themeSlice';
+
 
 
 
 export default function Header() {
+    const dispatch = useDispatch();
     const {currentUser} = useSelector((state)=> state.user)
+    const {theme} = useSelector((state)=> state.theme)
     const path = useLocation().pathname;
   return (
     
@@ -30,13 +33,36 @@ export default function Header() {
 
 
         <div className='flex gap-2'>
-            <Button className='h-10 w-12 cursor-pointer' color={'gray'} pill >
-                <BsFillMoonStarsFill/>
+            <Button className='h-10 w-12 cursor-pointer' color={'gray'} pill onClick={()=>{dispatch(toggletheme())}} >
+                {theme === "light" ?
+                <BsFillMoonStarsFill /> : <BsSunFill/>
+            }
             </Button>
 
-       {!currentUser && <Link to={'/sign-in'} >
+       {!currentUser ?( <Link to={'/sign-in'} >
         <Button  gradientDuoTone={'purpleToBlue'}>SingIn</Button>
-        </Link>}
+        </Link>)
+                :
+        (   <Dropdown inline arrowIcon={false}  label={
+            <Avatar alt='user' rounded img={currentUser.googlePhotoUrl}/>
+           }>
+
+                <DropdownHeader>
+                    <span className='text-sm font-semibold'>@{currentUser.username}</span>
+                </DropdownHeader>
+                <DropdownHeader>
+                <span className='text-sm font-semibold'>{currentUser.email}</span>
+                </DropdownHeader>
+            <Link to={'/profile'} active={path === '/profile'}>
+            <DropdownItem>Profile</DropdownItem>
+           </Link>
+            <DropdownItem>SignOut</DropdownItem>
+
+           <DropdownDivider/>
+           
+           </Dropdown>
+           
+            )}
         
         <Navbar.Toggle />
         </div>
@@ -54,13 +80,7 @@ export default function Header() {
                 </Link>
                 </Navbar.Link>
 
-            {currentUser && <Navbar.Link active={path === '/profile'} as={'div'}>
-                <Link to={'/profile'}>
-                <img src={currentUser.googlePhotoUrl} alt="" className='rounded-full w-10 h-10' />
-               
-                 
-                </Link>
-            </Navbar.Link>}
+            
 
         </Navbar.Collapse>
 
