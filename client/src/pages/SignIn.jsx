@@ -72,14 +72,14 @@ export default function SignIn() {
           type="text"
           id="email"
           placeholder="Email"
-          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw]"
+          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] lowercase"
           onChange={handleChange}
         />
         <TextInput
           type="password"
           id="password"
           placeholder="Password"
-          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw]"
+          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] lowercase"
           onChange={handleChange}
         />
         <Button disabled={loading}

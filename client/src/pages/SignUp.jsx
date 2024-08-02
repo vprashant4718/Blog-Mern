@@ -74,30 +74,30 @@ export default function SignUp() {
           type="text"
           id="username"
           placeholder="Username"
-          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw]"
+          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] lowercase"
           onChange={handleChange}
         />
         <TextInput
-          type="text"
+          type="email"
           id="email"
           placeholder="Email"
-          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw]"
+          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] lowercase"
           onChange={handleChange}
         />
         <TextInput
           type="password"
           id="password"
           placeholder="Password"
-          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw]"
+          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] lowercase"
           onChange={handleChange}
         />
         <Button disabled={loading}
           type="submit"
           gradientDuoTone={"purpleToBlue"}
-          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none"
+          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none dark:text-white"
         >
           {loading ? (
-            <Spinner className="text-sm" />
+            <Spinner className="text-sm dark:text-white" />
           ) : (
             "SignUp"
           )}
