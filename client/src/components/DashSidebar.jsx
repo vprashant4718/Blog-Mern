@@ -22,7 +22,7 @@ if (tabUrl) {
         <SidebarItems>
         <SidebarItemGroup>
             <Link to={'/dashboard?tab=profile'}>
-                <SidebarItem active={tab==='profile'} icon={HiUser} label={'user'} labelColor={'dark'}>
+                <SidebarItem active={tab==='profile'} icon={HiUser} label={'user'} labelColor={'dark'} as='div'>
                     Profile
                 </SidebarItem>
             </Link>
