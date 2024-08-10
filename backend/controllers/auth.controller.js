@@ -96,7 +96,7 @@ try{
 
     await newUser.save();
 
-     const jwt_token = jwt.sign({id:user._id}, process.env.JWT_SECRET)
+     const jwt_token = jwt.sign({id:newUser._id}, process.env.JWT_SECRET)
      const {password, ...rest} = user._doc;
     
      res.cookie('access_token', jwt_token);  
@@ -104,6 +104,6 @@ try{
  }
 }
 catch(error){
-    console.log(error)
+    next(error)
 }
 }

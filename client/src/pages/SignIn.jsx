@@ -8,7 +8,7 @@ import OAuth from '../components/OAuth';
 
 
 export default function SignIn() {
-  const {loading, error:errormessage}= useSelector((state => state.user));
+  const {loading, error:errormes}= useSelector((state => state.user));
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formdata, setformdata] = useState({});
@@ -24,7 +24,7 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     if (!formdata.email || !formdata.password) {
       return dispatch(signInFailure("All fields are required"));
     }
@@ -102,9 +102,9 @@ export default function SignIn() {
         <Alert className="mt-5 w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw]" color={'success'}>
           {message}
          </Alert>}
-          {errormessage &&   
+          {errormes &&   
           <Alert className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw]" color={'failure'}> 
-          {errormessage} 
+          {errormes} 
           </Alert>} 
           </div>
       </form>
