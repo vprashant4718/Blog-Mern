@@ -41,7 +41,7 @@ export default function SignUp() {
       if(data.success === false){
         setloading(false);
         setmessage(false);
-       return seterrormessage(data.message);
+       return seterrormessage(data.message==='getaddrinfo ENOTFOUND ac-qqzgln6-shard-00-01.jscrtou.mongodb.net'? 'no internet connect to internet' : data.message);
       }
       setloading(false);
       seterrormessage(false);
@@ -81,7 +81,7 @@ export default function SignUp() {
           type="email"
           id="email"
           placeholder="Email"
-          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] lowercase"
+          className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] lowercase "
           onChange={handleChange}
         />
         <TextInput

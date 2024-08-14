@@ -53,7 +53,7 @@ if (!email || !password || email=== '' || password=== '') {
 
  }
  
- const jwt_token = jwt.sign({id:user._id}, process.env.JWT_SECRET)
+ const jwt_token = jwt.sign({id:user._id, admin:user.isAdmin}, process.env.JWT_SECRET)
  const {password:pass, ...rest} = user._doc;
 
  res.cookie('access_token', jwt_token)
@@ -78,7 +78,7 @@ try{
  
  if(user){
           
-     const jwt_token = jwt.sign({id:user._id}, process.env.JWT_SECRET)
+     const jwt_token = jwt.sign({id:user._id, admin:user.isAdmin}, process.env.JWT_SECRET)
      const {password:pass, ...rest} = user._doc;
     
      res.cookie('access_token', jwt_token);  
@@ -96,7 +96,7 @@ try{
 
     await newUser.save();
 
-     const jwt_token = jwt.sign({id:newUser._id}, process.env.JWT_SECRET)
+     const jwt_token = jwt.sign({id:newUser._id, admin:newUser.isAdmin}, process.env.JWT_SECRET)
      const {password, ...rest} = user._doc;
     
      res.cookie('access_token', jwt_token);  

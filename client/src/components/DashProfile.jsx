@@ -11,6 +11,7 @@ import {updateUserFailure, updateUserStart,updateUserSuccess, deleteUserStart, d
 import { AiOutlineDelete } from "react-icons/ai";
 import { PiSignOutBold } from "react-icons/pi";
 import { PiWarningBold } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 
 export default function DashProfile() {
@@ -35,7 +36,6 @@ export default function DashProfile() {
     }
   };
 
-  console.log(formdata);
   useEffect(() => {
     if (profile) {
       uploadProfileImage();
@@ -212,14 +212,14 @@ export default function DashProfile() {
         {profileUploadError && (
           <Alert color={"failure"}>{profileUploadError}</Alert>
         )}
-        <div className="flex flex-col gap-4 justify-center dark:text-black">
+        <div className="flex flex-col gap-4 justify-center dark:text-white ">
           <input
             type="text"
             name="username"
             id="username"
             onChange={onHandleChange}
             defaultValue={currentUser.username}
-            className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none lowercase"
+            className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none lowercase dark:bg-[rgb(15,25,39)]"
           />
           <input
             type="email"
@@ -227,14 +227,14 @@ export default function DashProfile() {
             id="email"
             onChange={onHandleChange}
             defaultValue={currentUser.email}
-            className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none lowercase"
+            className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none lowercase dark:bg-[rgb(15,25,39)]"
           />
           <input
             type="password"
             name="password"
             id="password"
             onChange={onHandleChange}
-            className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none lowercase"
+            className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none lowercase dark:bg-[rgb(15,25,39)]"
           />
 
           <Button
@@ -249,6 +249,17 @@ export default function DashProfile() {
               'Update'
             )}
           </Button>
+
+
+          { currentUser.isAdmin ===true &&
+         ( <Link to={'/create-post'}>
+          <Button
+            type="button"
+            gradientDuoTone={"purpleToPink"}
+            className="w-[90vw] border rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none dark:text-white" >
+              Create Post
+          </Button>
+              </Link>)}
         </div>
       </form>
             <div className="flex flex-row justify-between w-[90vw] sm:w-[50vw] lg:w-[40vw]">

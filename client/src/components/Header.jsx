@@ -53,7 +53,10 @@ export default function Header() {
                 <DropdownHeader>
                 <span className='text-sm font-semibold'>{currentUser.email}</span>
                 </DropdownHeader>
-            <Link to={'/profile'} active={path === '/profile'}>
+            <Link to={'/dashboard'} active={path === '/dashboard'}>
+            <DropdownItem>DashBoard</DropdownItem>
+           </Link>
+            <Link to={'/dashboard?tab=profile'} active={path === '/dashboard'}>
             <DropdownItem>Profile</DropdownItem>
            </Link>
             <DropdownItem>SignOut</DropdownItem>

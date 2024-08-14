@@ -42,7 +42,7 @@ export default function SignIn() {
       const data = await res.json();
 
       if(data.success === false){
-        return dispatch(signInFailure(data.message));
+        return dispatch(signInFailure(data.message==='getaddrinfo ENOTFOUND ac-qqzgln6-shard-00-01.jscrtou.mongodb.net'? 'no internet connect to internet' : data.message));
       }
       setmessage("User Created Successfully")
       dispatch(signInSuccess(data));
