@@ -21,10 +21,9 @@ export default function CreatePost() {
     setpostdata({
       ...postdata, [e.target.id]:e.target.value,
     })
-  };
-     
+  }; 
   
-  
+  console.log(postdata);
   const handleImageChange=(e)=>{
     setImageUploadError(null);
     setfile(e.target.files[0]); 
@@ -98,8 +97,7 @@ export default function CreatePost() {
       <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-4 m-auto'>
         <div className='flex flex-col gap-2 w-[90vw] rounded-lg sm:flex-row sm:w-[50vw] lg:w-[50vw] focus:outline-none'>
           <TextInput placeholder='title' id='title' onChange={handleOnChange} className='w-[90vw] rounded-lg sm:w-[50vw] lg:w-[40vw] focus:outline-none' />
-          <select name="categories" id="category"  onChange={handleOnChange} className='rounded-lg w-[90vw] sm:w-[30vw] lg:w-[20vw] focus:outline-none dark:text-black'>categories
-            <option value="categories">categories</option>
+          <select name="categories" id="categories"  onChange={handleOnChange} className='rounded-lg w-[90vw] sm:w-[30vw] lg:w-[20vw] focus:outline-none dark:text-black'>categories
             <option value="Next.js">Next.js</option>
             <option value="React.js">React.js</option>
             <option value="Javascript">Javascript</option>
