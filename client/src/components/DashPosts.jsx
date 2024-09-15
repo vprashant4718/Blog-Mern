@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 export default function DashPosts() {
   const {currentUser} = useSelector((state)=> state.user);
   const [userPost, setUserPost]= useState([]);
+const [showMore, setShowMore] = useState(true);
+
   console.log(userPost);
   useEffect(() => {
      const getpostdata=async()=>{
@@ -13,6 +15,9 @@ export default function DashPosts() {
         const data = await res.json();
         if(res.ok){
           setUserPost(data.posts);
+          if(data.posts.length < 1){
+            setShowMore(false);
+          }
         }
         else{
           console.log(error.message);
@@ -28,9 +33,27 @@ export default function DashPosts() {
     }
   }, [currentUser._id])
   
+
+  const handleShowMore = async()=>{
+    const startIndex = userPost.length;
+    try {
+      const res = await fetch(`/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`);
+      const data = await res.json();
+      if(res.ok){
+        setUserPost((prev)=> [...prev, ...data.posts]);
+        if(data.posts.length < 1){
+          setShowMore(false);
+        }
+      }
+      else{
+        console.error(error);
+      }
+    } catch (error) {
+      
+    }
+  }
   return (
       <div className='w-48'>
-        
       <Table className='w-48'>
         <TableHead>
           <TableHeadCell>DATE UPDATE</TableHeadCell>
@@ -51,6 +74,11 @@ export default function DashPosts() {
           </TableRow>
         </TableBody>)}
       </Table>
+
+      {
+        showMore && 
+       (<button onClick={handleShowMore} className='mb-6 text-yellow-300 text-center border-solid border-yellow-300 m-auto'>+Show More</button>)
+      }
       </div>
   )
 
